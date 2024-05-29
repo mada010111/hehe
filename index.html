@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nandayo koitse</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            overflow-x: hidden;
+        }
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+        .animated-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 36px;
+            margin-bottom: 20px;
+            animation: rainbowText 5s infinite;
+        }
+        @keyframes rainbowText {
+            0% { color: red; }
+            14% { color: orange; }
+            28% { color: yellow; }
+            42% { color: green; }
+            56% { color: blue; }
+            70% { color: indigo; }
+            84% { color: violet; }
+            100% { color: red; }
+        }
+        p {
+            color: #333;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        .cake {
+            display: none;
+            width: 200px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-out;
+            margin: 20px auto;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        .btn {
+            background-color: #ff6347;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #ff4500;
+        }
+        .video-container {
+            position: relative;
+            width: 640px;
+            height: 360px;
+            margin: 20px auto;
+            display: none;
+        }
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .scroll-section {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #fff;
+            display: none;
+            animation: fadeIn 1s ease-out;
+        }
+        .scroll-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="animated-text">congrats repeat year!!</h1>
+        <p>Klik tombolnya gan!</p>
+        <button class="btn" onclick="toggleGift()">Lihat Kejutan</button>
+        <img src="poto1.jpg" alt="Ucapan Ulang Tahun" class="cake" id="cake">
+        <div class="video-container" id="video-container">
+            <video controls id="video">
+                <source src="video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        <audio id="audio" src="QKThr.mp3" loop></audio>
+    </div>
+
+    <div class="scroll-section" id="scroll-section">
+        <h2>enjoy...</h2>
+        <img src="poto 2.1.jpg" alt="hehe">
+    </div>
+
+    <script>
+        function toggleGift() {
+            var cake = document.getElementById('cake');
+            var videoContainer = document.getElementById('video-container');
+            var audio = document.getElementById('audio');
+            var video = document.getElementById('video');
+
+            // Memeriksa apakah kue sudah ditampilkan
+            if (cake.style.display === "none") {
+                // Jika belum ditampilkan, tampilkan video, foto, dan putar musik
+                cake.style.display = "block";
+                videoContainer.style.display = "block";
+                audio.play();
+            } else {
+                // Jika sudah ditampilkan, sembunyikan kembali video, foto, dan hentikan musik
+                cake.style.display = "none";
+                videoContainer.style.display = "none";
+                audio.pause();
+                audio.currentTime = 0;
+                video.pause();  // Pastikan video dijeda saat ditutup
+            }
+        }
+
+        // Menangani peristiwa perubahan visibilitas halaman
+        document.addEventListener('visibilitychange', function() {
+            var video = document.getElementById('video');
+            if (document.hidden) {
+                video.pause();
+            }
+        });
+
+        // Tampilkan bagian scroll-section saat di-scroll ke bawah
+        window.addEventListener('scroll', function() {
+            var scrollSection = document.getElementById('scroll-section');
+            var rect = scrollSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom >= 0) {
+                scrollSection.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
